@@ -1,37 +1,48 @@
 <div class="container text-center" style="width: 500px;max-width: 90%">
   
-		<h1>ADD A DATA SOURCE</h1><p class="help-block"><!--We'll double check if all is good first and then update it--></p></h1>
-		<form class="form-signin" role="form">
-			<div class="form-group">
-				<label for="inputName" class="sr-only">Name</label>
-				<input class="form-control" type="text" id="inputName" placeholder="Enter source name here">
-			</div>
-			<div class="form-group">
-				<label for="inputDescription" class="sr-only">Description</label>
-				<input class="form-control" type="text" id="inputDescription" placeholder="Enter source description here" maxlength="200">
-			</div>
+		<!--<h1>ADD A DATA SOURCE</h1><p class="help-block"><!--We'll double check if all is good first and then update it</p></h1>-->
+		<br>
+		<form class="form-signin" role="form" ng-hide="outputReturn" >
 			
-		   <div class="fileinput fileinput-new" data-provides="fileinput">
-          <label>Image uploader</label>
-          <div class="fileinput-new thumbnail">
-            <img data-src="" class="img-responsive">
+		   <div class="fileinput fileinput-new" >
+	            <div ng-show="inputForm.fileDataURL" class="fileinput-new thumbnail">
+		            <img ng-src="{{inputForm.fileDataURL}}" class="img-responsive">
+		        </div>
+				<span ng-hide="inputForm.fileDataURL">
+					&nbsp;
+				</span>
+	            <span class="btn btn-default btn-file">
+	            	<span class="fileinput-new">{{!inputForm.fileDataURL?"Select screenshot image... (Required)":"Change"}}</span>
+					<input required id="profilePhotoFileUpload" type="file" name="inputForm.image" onchange="angular.element(this).scope().onChangeFile()" accept="image/*" >
+				</span>
           </div>
-          <div class="fileinput-preview fileinput-exists thumbnail"></div>
-          <div>
-            <span class="btn btn-default btn-file"><span class="fileinput-new">Select image...</span><span class="fileinput-exists">Change</span><input type="file" name="inputForm.image"></span>
-            <a href="#" class="btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a>
-          </div>
-        </div>
-		   			<div class="form-group">
-				<label for="inputName" class="sr-only">Homepage URL</label>
-				<input class="form-control" type="text" id="inputHomepageURL" placeholder="Enter homepage URL here (Main page)" pattern="https?://.+">
+        
+          
+			<div class="form-group">
+				<label for="inputName" class="sr-only">Name *</label>
+				<input required ng-model="inputForm.name" class="form-control" type="text" id="inputName" placeholder="Enter source name here">
+			</div>
+			<div class="form-group">
+				<label for="inputDescription" class="sr-only">Description *</label>
+				<input required ng-model="inputForm.description" class="form-control" type="text" id="inputDescription" placeholder="Enter source description here" maxlength="200">
+			</div>
+			          
+          
+        
+		 	<div class="form-group">
+				<label for="inputName" class="sr-only">Homepage URL *</label>
+				<input required ng-model="inputForm.linkURL" class="form-control" type="text" id="inputHomepageURL" placeholder="Enter homepage URL here (Main page)" pattern="https?://.+" >
 			</div>
 			<div class="form-group">
 				<label for="inputName" class="sr-only">Example URL</label>
-				<input class="form-control" type="text" id="inputExampleURL" placeholder="Enter example URL here (An actual API call or direct link to file)" pattern="https?://.+">
+				<input ng-model="inputForm.exampleURL" class="form-control" type="text" id="inputExampleURL" placeholder="Enter example URL here (An actual API call or direct link to file)" pattern="https?://.+" 
+				
+				popover-animation="true" popover-placement="top" popover-popup-delay="250" popover-append-to-body="true"
+				
+				popover="Try to get an API call URL or the URL to a file"  popover-trigger="focus" >
 			</div>
 			
-			<ui-select multiple ng-model="inputForm.tags" theme="bootstrap" ng-disabled="disabled" close-on-select="false"  title="Choose a tag">
+			<ui-select multiple style="text-align: left" ng-model="inputForm.tags" theme="bootstrap" ng-disabled="disabled" close-on-select="true"  title="Choose a tag">
 			    <ui-select-match placeholder="Select tags...(ex: Movies, finance, health...)">{{$item.name}}</ui-select-match>
 			    <ui-select-choices repeat="tag in tags | filter:$select.search">
 			      {{tag.name}}
@@ -45,36 +56,32 @@
 			  <option value="public">public</option>
 			</select>-->
 			<div>
-				<select class="form-control"  class="combobox">
-				   <option value="" selected>Category</option>
-				  <option value="entertainment">Entertainment</option>
-				  <option value="health">health</option>
-				  <option value="finance">finance</option>
-				  <option value="finance">government</option>
+				<select required class="form-control"  class="combobox">
+				  <option value="" selected>SELECT CATEGORY</option>
+				  <option ng-repeat="category in categories" ng-value="category.name">{{category.name}}</option>
 				</select>
 			</div>
-			<!--<h1>SECONDARY CATEGORY</h1>
-			<select>
-			  <option value="music">Music</option>
-			  <option value="health">health</option>
-			  <option value="finance">finance</option>
-			  <option value="finance">finance</option>
-			</select>-->
+			
 			<br><br>
-			<input class="btn btn-default" type="checkbox" name="format" value="JSON" />&nbsp;&nbsp;JSON&nbsp;&nbsp;
-		    <input type="checkbox" name="format" value="XML" />&nbsp;&nbsp;XML&nbsp;&nbsp;
-		    <input type="checkbox" name="format" value="EXCEL" />&nbsp;&nbsp;Excel&nbsp;&nbsp;
-		    <input type="checkbox" name="format" value="CSV" />&nbsp;&nbsp;CSV&nbsp;&nbsp;<br /><br>
+			<p class="scaleUp1_5">
+			<input type="checkbox" ng-model="inputForm.dataFormat.json" name="format" value="JSON" ng-true-value="'JSON'" ng-false-value="''"/>&nbsp;&nbsp;JSON&nbsp;&nbsp;
+		    <input type="checkbox" ng-model="inputForm.dataFormat.xml" name="format" value="XML" ng-true-value="'XML'" ng-false-value="''"/>&nbsp;&nbsp;XML&nbsp;&nbsp;
+		    <input type="checkbox" ng-model="inputForm.dataFormat.excel" name="format" value="EXCEL" ng-true-value="'EXCEL'" ng-false-value="''"/>&nbsp;&nbsp;Excel&nbsp;&nbsp;
+		    <input type="checkbox" ng-model="inputForm.dataFormat.csv" name="format" value="CSV" ng-true-value="'CSV'" ng-false-value="''"/>&nbsp;&nbsp;CSV&nbsp;&nbsp;<br /><br>
+			</p>
 		    <!--<input type="checkbox" name="format" value="OTHER" />Other<br />-->
-		    <p>
+		    <p class="scaleUp1_5">
 			    Quality:
-		     <rating ng-model="quality" max="5" readonly="false" on-hover="hoveringOver(value)" on-leave="overStar = null"></rating>
+		     <rating ng-model="inputForm.dataQuality" style="transform: scale(2,2)" max="5" readonly="false" on-hover="hoveringOver(value)" on-leave="overStar = null"></rating>
 		   | 
 			    Quantity:
-		     <rating ng-model="quantity" max="5" readonly="false" on-hover="hoveringOver(value)" on-leave="overStar = null"></rating><br><br>
+		     <rating ng-model="inputForm.dataQuantity" max="5" readonly="false" on-hover="hoveringOver(value)" on-leave="overStar = null"></rating><br><br>
 		    </p>
-		    <button class="btn btn-lg btn-default btn-block" type="submit">SUBMIT</button>
-
-			
+		    <button class="btn btn-lg btn-default btn-block" type="button" ng-click="onClickSubmit()">SUBMIT</button>
+		    <button class="btn btn-lg btn-default btn-block" type="button" ng-click="onClickCancel()">CANCEL</button>
+		   
+		   
 		</form>
+		<br><br>
+		 
 </div>

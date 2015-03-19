@@ -19,3 +19,5 @@ body, html {
   align-items: center;
   flex-wrap: wrap; }
 
+footer {
+  color: grey; }

@@ -3,9 +3,19 @@
 angular.module('datasourceApp')
   .config(function ($stateProvider) {
     $stateProvider
-      .state('form', {
+      .state('main.form', {
         url: '/form',
-        templateUrl: 'app/form/form.html',
-        controller: 'FormCtrl'
+         onEnter: ['$stateParams', '$state', '$modal', '$resource', function($stateParams, $state, $modal, $resource) {
+	        $modal.open({
+	            templateUrl: "app/form/form.html",   
+	            controller: 'FormCtrl'
+	        }).result.finally(function() {
+	            $state.go('^');
+	        });
+	    }]
+        
+        
+        //templateUrl: 'app/form/form.html',
+        //controller: 'FormCtrl'
       });
   });

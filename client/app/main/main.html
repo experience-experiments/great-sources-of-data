@@ -1,15 +1,17 @@
 <!--<div ng-include="'components/navbar/navbar.html'"></div>-->
 
+<div ui-view></div>
+
 <header class="text-center" style="margin: auto">
  <br><br><br><br><img src="assets/images/logo.png"><br>Yummy data sources ready to eat. Num,num,num!<br>
- 	<br><div class="form-group text-center" style="margin: auto;width: 250px">
+ 	<br><!--<div class="form-group text-center" style="margin: auto;width: 250px">
 				<label for="searchFilter" class="sr-only">Search</label>
 				<input class="form-control" type="text" id="searchFilter" placeholder="Search" style="width: 250px">
-			</div>
- 
+			</div>-->
+ <br>
+<span ng-repeat="category in categories"><button class="btn-default btn">&nbsp;{{category.name}}&nbsp;</button></span>
+
 </header>
-
-
 
 <div class="container">
   <div class="row">
@@ -36,7 +38,7 @@
 		                        Quality: <rating ng-model="datasource.dataQuality" max="5" readonly="true" on-hover="hoveringOver(value)" on-leave="overStar = null"></rating> | 
 		                        Quantity: <rating ng-model="datasource.dataQuantity" max="5" readonly="true" on-hover="hoveringOver(value)" on-leave="overStar = null"></rating><br><br>
 		                        
-		                        Formats: {{(datasource.dataFormat) ? (datasource.dataFormat | join:","):"Unknown"}}<br>
+		                        Format: {{(datasource.deliveryFormat) ? (datasource.deliveryFormat | join:","):"Unknown"}}<br>
 
 		                        <a ng-href="{{datasource.linkURL}}" target="_blank" tooltip="{{datasource.ink}}">{{datasource.name}}</a> | 
 		                        <a target="_blank" ng-href="{{datasource.exampleURL}}">Example</a>
@@ -54,14 +56,14 @@
       <ul class="nav col-md-4 col-lg-4 col-sm-6">
 	       <li>
         	<div class="card-container">
-	        	 <div class="front btn" ng-click="onClickAddBtn()">
+	        	 <button class="front btn" ng-click="onClickAddBtn()" popover-animation="true" popover="Add a data source" popover-trigger="mouseenter" popover-placement="top" popover-popup-delay="250" popover-append-to-body="true">
                        <div>
 							<div class="centerFlex" style="width:260px;height:200px;margin: auto;text-align: center">
 							    <!--{{datasource.name| uppercase}}<br>-->
 							    <img src="assets/images/plus.svg" width="80" height="80" style="margin:auto;"/>
 							</div>
                        </div>
-                    </div> <!-- end front panel -->
+                    </button> <!-- end front panel -->
         	</div>
         </li>
 
@@ -73,7 +75,9 @@
 
 <footer class="footer">
   <div class="container">
-      <p>Provided by <a href="">RMA Consulting</a>
-        <a href="https://twitter.com/rma_consulting">@RMA_Consulting</a></p>
+     
+		<h3><a href="mailto:mathieu.gosselin@rma-consulting.com">Tell us</a> how we can improve this tool</h3>
+		 <p style="font-size: x-small">Open source project maintained by <a href="">RMA Consulting</a>
+        Contribute on GITHUB</p>
   </div>
 </footer>
