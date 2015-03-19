@@ -1,0 +1,79 @@
+<!--<div ng-include="'components/navbar/navbar.html'"></div>-->
+
+<header class="text-center" style="margin: auto">
+ <br><br><br><br><img src="assets/images/logo.png"><br>Yummy data sources ready to eat. Num,num,num!<br>
+ 	<br><div class="form-group text-center" style="margin: auto;width: 250px">
+				<label for="searchFilter" class="sr-only">Search</label>
+				<input class="form-control" type="text" id="searchFilter" placeholder="Search" style="width: 250px">
+			</div>
+ 
+</header>
+
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12">
+      <h1 class="page-header text-center"></h1>
+      <ul class="nav col-md-4 col-lg-4 col-sm-6" ng-repeat="datasource in datasourceCollection">
+        <li>
+        <div class="card-container">
+                <div class="card" >
+                    <div class="front">
+                       <div>
+							<div class="centerFlex" style="width:260px;height:200px;margin: auto;text-align: center">
+							    <!--{{datasource.name| uppercase}}<br>-->
+							    <img ng-hide="datasource.image" ng-src="{{'http://images.shrinktheweb.com/xino.php?stwembed=1&stwaccesskeyid=337f6ffe597b6b6&stwsize=sm&stwurl='+datasource.linkURL}}" />
+							    <img src="{{datasource.image.url}}" width="260px" height="auto" style="margin:auto;width:100%;height:auto;max-height:200px;max-width: 220px">
+							    
+							</div>
+                       </div>
+                    </div> <!-- end front panel -->
+                    <div class="back">
+                        <div style="margin: 10px;">
+	                        <p>{{datasource.description}}</p><br>
+	                        <div>
+		                        Quality: <rating ng-model="datasource.dataQuality" max="5" readonly="true" on-hover="hoveringOver(value)" on-leave="overStar = null"></rating> | 
+		                        Quantity: <rating ng-model="datasource.dataQuantity" max="5" readonly="true" on-hover="hoveringOver(value)" on-leave="overStar = null"></rating><br><br>
+		                        
+		                        Formats: {{(datasource.dataFormat) ? (datasource.dataFormat | join:","):"Unknown"}}<br>
+
+		                        <a ng-href="{{datasource.linkURL}}" target="_blank" tooltip="{{datasource.ink}}">{{datasource.name}}</a> | 
+		                        <a target="_blank" ng-href="{{datasource.exampleURL}}">Example</a>
+	                        </div>
+                        </div>
+                    </div> <!-- end back panel -->
+                </div> <!-- end card -->
+            </div> <!-- end card-container -->
+
+
+        </li>
+               
+        
+      </ul>
+      <ul class="nav col-md-4 col-lg-4 col-sm-6">
+	       <li>
+        	<div class="card-container">
+	        	 <div class="front btn" ng-click="onClickAddBtn()">
+                       <div>
+							<div class="centerFlex" style="width:260px;height:200px;margin: auto;text-align: center">
+							    <!--{{datasource.name| uppercase}}<br>-->
+							    <img src="assets/images/plus.svg" width="80" height="80" style="margin:auto;"/>
+							</div>
+                       </div>
+                    </div> <!-- end front panel -->
+        	</div>
+        </li>
+
+	      
+      </ul>
+    </div>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+      <p>Provided by <a href="">RMA Consulting</a>
+        <a href="https://twitter.com/rma_consulting">@RMA_Consulting</a></p>
+  </div>
+</footer>
