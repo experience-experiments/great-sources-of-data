@@ -3,11 +3,14 @@
 angular.module('datasourceApp')
   .controller('MainCtrl', function ($scope, $http,$state, $modal,$position) {
 	  
+	$scope.categoryFilter = '';
+	
+	//DATA SOURCES
+    $scope.datasourceCollection = [];
     
     Parse.initialize("p8GR4aBok0VQ4sXPWoEXSD2Y3xhqDRrqjv4fEjtn", "gR80DrqRpinCOrpNG6XzQPN6b8RspBMj2J8p7ANh");
     
-    //DATA SOURCES
-    $scope.datasourceCollection = [];
+
 
     var DataSource = Parse.Object.extend("datasource");
     var query = new Parse.Query(DataSource);
@@ -50,6 +53,19 @@ angular.module('datasourceApp')
 	
 	
 	
+	
+		
+	
+	$scope.onClickCategory= function(category){
+		
+		if($scope.categoryFilter!=category){		
+			$scope.categoryFilter =category;
+		}else {
+			$scope.categoryFilter = null;
+		}
+		
+	};
+	
 	$scope.onClickAddBtn = function(){
 		
 		$state.go('main.form');
@@ -59,4 +75,10 @@ angular.module('datasourceApp')
 	
 
 	
-  });
+  }).filter('filterByCategory',  function() {
+
+  return function(input) {
+	  input.category
+    return input ? '\u2713' : '\u2718';
+  };
+});

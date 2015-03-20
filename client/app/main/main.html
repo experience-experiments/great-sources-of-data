@@ -9,15 +9,26 @@
 				<input class="form-control" type="text" id="searchFilter" placeholder="Search" style="width: 250px">
 			</div>-->
  <br>
-<span ng-repeat="category in categories"><button class="btn-default btn">&nbsp;{{category.name}}&nbsp;</button></span>
 
 </header>
 
 <div class="container">
+	
   <div class="row">
-    <div class="col-lg-12">
-      <h1 class="page-header text-center"></h1>
-      <ul class="nav col-md-4 col-lg-4 col-sm-6" ng-repeat="datasource in datasourceCollection">
+	<div class="text-center">
+		<!--FIRST CATEGORY = ALL -->
+		<span class="col-sd-1">
+			<button class="btn-primary btn" ng-click="onClickCategory(null)"><h6>ALL</h6></button>
+		</span>
+		<span class="col-sd-1" ng-repeat="category in categories">
+			<button class="btn-default btn" ng-click="onClickCategory(category)"><h6>{{category.name}}</h6></button>
+		</span>
+	</div>
+
+	   
+    <div class="col-lg-12 text-center" ng-repeat="category in categories | filter:categoryFilter">
+      <h1 class="page-header text-center">{{category.name}}</h1>
+      <ul class="nav col-md-4 col-lg-4 col-sm-6" ng-repeat="datasource in datasourceCollection | filter:category.objectId">
         <li>
         <div class="card-container">
                 <div class="card" >

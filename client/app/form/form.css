@@ -26,3 +26,7 @@
 */
 .scaleUp1_5 {
   transform: scale(1.5, 1.5); }
+
+#spidergraphcontainer {
+  width: 400px;
+  height: 400px; }

@@ -7,7 +7,102 @@ angular.module('datasourceApp')
     $scope.inputForm = {};
     $scope.inputForm.tags=[];
     $scope.inputForm.image="";
-    //$scope.outputReturn = ;
+    $scope.inputForm.spiderGraphLabels = ['trustworthy','consistency','quantity','recency','simplicity'];
+
+	
+	$scope.layerData = [3,3,4,5,6];
+	
+	
+	
+	
+	///////////////// SPIDER GRAPH STUFF ////////////////
+	// TO FIX //
+	/*
+	
+	$scope.loadSpiderGraph = function () {
+
+        $scope.setLayerVars(3);  // sets the default amount for the circles
+        $('#spidergraphcontainer').spidergraph({
+            'fields':$scope.spiderGraphLabels
+        });
+        $('#spidergraphcontainer').spidergraph('resetdata');
+        $('#spidergraphcontainer').spidergraph('addlayer', {
+            'name':'layer1',
+            'strokecolor':'rgba(230,104,230,0.8)',
+            'fillcolor':'rgba(230,104,230,0.6)',
+            'data':[5, 4, 9, 8, 1]
+        });
+        $('#spidergraphcontainer').spidergraph('applyActiveData', 'layer1');
+
+
+        $scope.setSpiderGraphActiveData('layer1');
+        $('#spidergraphcontainer').spidergraph('applyActiveData', 'layer1');
+    };
+    
+    
+    
+    $scope.setLayerVars = function (defaultAmount) {
+
+        $scope.inputForm.trustworthy = defaultAmount;
+        $scope.inputForm.consistency = defaultAmount;
+        $scope.inputForm.quantity = defaultAmount;
+        $scope.inputForm.recency = defaultAmount;
+        $scope.inputForm.simplicity = defaultAmount;
+       
+
+        $scope.layer1Data = [];
+        for (var i = 0; i < $scope.inputForm.spiderGraphLabels.length; i++) {
+            $scope.layer1Data.push(defaultAmount);
+        }
+    };
+    
+    
+    $('#spidergraphcontainer').bind('spiderdatachange', function (event, data) {
+
+            $scope.trustworthy = data[0];
+            $scope.consistency = data[1];
+            $scope.quantity = data[2];
+            $scope.recency = data[3];
+            $scope.simplicity = data[4];
+      
+        $scope.$apply();
+    });
+    
+    
+    	$scope.loadSpiderGraph();
+    
+  /*
+    $('#spidergraphcontainer').spidergraph({
+        'fields': ['trustworthy','consistency','quantity','recency','simplicity'],
+        'gridcolor': 'rgba(20,20,20,1)'
+    });
+      
+    
+    //
+     $('#spidergraphcontainer').spidergraph('addlayer', { 
+        'strokecolor': 'rgba(230,204,0,0.8)',
+        'fillcolor': 'rgba(230,204,0,0.6)',
+        'data': [5, 4, 9, 8, 1]
+    });
+    /*
+    $('#spidergraphcontainer').spidergraph('addlayer', { 
+        'strokecolor': 'rgba(230,204,230,0.8)',
+        'fillcolor': 'rgba(230,204,230,0.6)',
+        'data': [5, 4, 9, 8, 1]
+    });
+    /*
+    //ADD DYNAMIC LAYER TO ALLOW MOUSE AND IPAD INPUT TOUCH
+     $('#spidergraphcontainer').spidergraph('setactivedata', { 
+        'strokecolor': 'rgba(0,204,230,0.8)',
+        'fillcolor': 'rgba(0,204,230,0.6)',
+        'data': [5, 5, 5, 5, 5]
+    });
+    
+    
+        $('#spidergraphcontainer').bind('spiderdatachange', function( ev, data ) {
+        alert( 'first field value is ' + data[0] );
+    });*/
+    
     
 	$scope.tags = [ ];
 	

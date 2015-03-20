@@ -19,5 +19,8 @@ body, html {
   align-items: center;
   flex-wrap: wrap; }
 
+h6 {
+  font-size: x-small; }
+
 footer {
   color: grey; }
