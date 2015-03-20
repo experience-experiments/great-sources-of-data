@@ -56,9 +56,9 @@
 			  <option value="public">public</option>
 			</select>-->
 			<div>
-				<select required class="form-control"  class="combobox">
+				<select required class="form-control"  class="combobox" ng-model="inputForm.category">
 				  <option value="" selected>SELECT CATEGORY</option>
-				  <option ng-repeat="category in categories" ng-value="category.name">{{category.name}}</option>
+				  <option ng-repeat="category in categories" ng-value="category.objectId">{{category.name}}</option>
 				</select>
 			</div>
 			
@@ -70,11 +70,9 @@
 		    <input type="checkbox" ng-model="inputForm.dataFormat.csv" name="format" value="CSV" ng-true-value="'CSV'" ng-false-value="''"/>&nbsp;&nbsp;CSV&nbsp;&nbsp;<br /><br>
 			</p>
 			
-			
+		<!--
     <div class="span4" id="spider_graph">
-         <!--place holder-->
-    </div>
-			<div id="spidergraphcontainer"></div>
+          </div>-->
 			
 			
 			

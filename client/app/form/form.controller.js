@@ -138,9 +138,11 @@ angular.module('datasourceApp')
 	myCategoryCollection.fetch({
 	  success: function(myCategoryCollection) {
 	    //console.log( myCollection.toJSON() );
-	    
+	    $scope.categoriesCollection = myCategoryCollection;
 	    $scope.categories = eval(myCategoryCollection.toJSON());
-		 //console.log( $scope.datasourceCollection );
+		
+		
+		
 		
 	    $scope.$apply();
 	  }
@@ -186,23 +188,27 @@ angular.module('datasourceApp')
 	    // Simple syntax to create a new subclass of Parse.Object.
 		var NewDatasource = Parse.Object.extend("datasource");
 		 
-		 //DATA FORMAT
+		 // FORMAT
 		 var dataFormatArray =[];
 		 for(var entry in $scope.inputForm.dataFormat){
 			 dataFormatArray.push(entry.toUpperCase());
 		 }
-
+		 
+		 // TAGS
 		  var tagsArray =[];
 		 for(var entry in $scope.inputForm.tags){
 			 tagsArray.push($scope.inputForm.tags[entry].name);
 			 console.log($scope.inputForm.tags[entry].name);
 		 }
-
+		 
+		 
+		 // FILE
 		var parseFile = new Parse.File('photo.png', $scope.inputForm.file);
 		
-
-		 console.log(dataFormatArray);
-		 console.log(tagsArray);
+		
+		//FROM CATEGORY ANGULAR OBJECT TO PARSE OBJECT
+		console.log($scope.categoriesCollection.get($scope.inputForm.category));
+		
 		 
 		// Create a new instance of that class.
 		var datasourceEntry = new NewDatasource();
@@ -214,6 +220,7 @@ angular.module('datasourceApp')
 		datasourceEntry.set("image",parseFile);
 		datasourceEntry.set("tags",tagsArray);
 		datasourceEntry.set("deliveryFormat",dataFormatArray);
+		datasourceEntry.set("category",$scope.categoriesCollection.get($scope.inputForm.category));
 		datasourceEntry.set("dataQuality",$scope.inputForm.dataQuality);
 		datasourceEntry.set("dataQuantity",$scope.inputForm.dataQuantity);
 	    
@@ -233,9 +240,14 @@ angular.module('datasourceApp')
 	    
 		datasourceEntry.save().then(function(){
 			
+			
+			
+			
 			$modalInstance.dismiss('submitted');
 			
 			$scope.outputReturn="Submitted! Cheers. We will check it to see if everything's good before publishing it.";
+			
+			alert("Submitted! Cheers. We will check it to see if everything's legit before publishing it.");
 		
 		},function(error){
 			
