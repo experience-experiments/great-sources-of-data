@@ -8,9 +8,6 @@ angular.module('datasourceApp')
     $scope.inputForm.tags=[];
     $scope.inputForm.image="";
     $scope.inputForm.spiderGraphLabels = ['trustworthy','consistency','quantity','recency','simplicity'];
-
-	
-	$scope.layerData = [2,2,2,2,2];
 	
 	
 	
@@ -33,7 +30,7 @@ angular.module('datasourceApp')
 	$scope.loadSpiderGraph = function () {
 		
 		
-        $scope.setLayerVars(5);  // sets the default amount for the circles
+        //$scope.setLayerVars(5);  // sets the default amount for the circles
         
         $('#spidergraphcontainer').spidergraph({
             'fields':$scope.inputForm.spiderGraphLabels,
@@ -45,7 +42,7 @@ angular.module('datasourceApp')
             'name':'layer1',
             'strokecolor':'rgba(230,104,230,0.1)',
             'fillcolor':'rgba(230,104,230,0.6)',
-            'data':[3,3,4,5,6]
+            'data':[5,5,5,5,5]
         });
        
         
