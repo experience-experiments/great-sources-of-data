@@ -17,26 +17,51 @@ angular.module('datasourceApp')
 	
 	///////////////// SPIDER GRAPH STUFF ////////////////
 	// TO FIX //
-	/*
 	
+    $scope.updateData = function () {
+        
+            $('#spidergraphcontainer').spidergraph('updateActiveData', [
+                $scope.inputForm.trustworthy,
+                $scope.inputForm.consistency,
+                $scope.inputForm.quantity,
+                $scope.inputForm.recency,
+                $scope.inputForm.simplicity]);
+       
+    };
+
+   	
 	$scope.loadSpiderGraph = function () {
-
-        $scope.setLayerVars(3);  // sets the default amount for the circles
+		
+		
+        $scope.setLayerVars(5);  // sets the default amount for the circles
+        
         $('#spidergraphcontainer').spidergraph({
-            'fields':$scope.spiderGraphLabels
+            'fields':$scope.inputForm.spiderGraphLabels,
+            'gridcolor': 'rgba(20,20,20,1)'
         });
+        
         $('#spidergraphcontainer').spidergraph('resetdata');
-        $('#spidergraphcontainer').spidergraph('addlayer', {
+       $('#spidergraphcontainer').spidergraph('addlayer', {
             'name':'layer1',
-            'strokecolor':'rgba(230,104,230,0.8)',
+            'strokecolor':'rgba(230,104,230,0.1)',
             'fillcolor':'rgba(230,104,230,0.6)',
-            'data':[5, 4, 9, 8, 1]
+            'data':[3,3,4,5,6]
         });
-        $('#spidergraphcontainer').spidergraph('applyActiveData', 'layer1');
+       
+        
+       $('#spidergraphcontainer').spidergraph('applyActiveData', 'layer1');
+       /**/
+	     $('#spidergraphcontainer').bind('spiderdatachange', function (event, data) {
+			console.log('Change data');
+            $scope.inputForm.trustworthy = data[0];
+            $scope.inputForm.consistency = data[1];
+            $scope.inputForm.quantity = data[2];
+            $scope.inputForm.recency = data[3];
+            $scope.inputForm.simplicity = data[4];
+      
+			$scope.$apply();
+    	});
 
-
-        $scope.setSpiderGraphActiveData('layer1');
-        $('#spidergraphcontainer').spidergraph('applyActiveData', 'layer1');
     };
     
     
@@ -57,20 +82,25 @@ angular.module('datasourceApp')
     };
     
     
-    $('#spidergraphcontainer').bind('spiderdatachange', function (event, data) {
 
-            $scope.trustworthy = data[0];
-            $scope.consistency = data[1];
-            $scope.quantity = data[2];
-            $scope.recency = data[3];
-            $scope.simplicity = data[4];
-      
-        $scope.$apply();
+     $(document).ready(function () {
+	    
+	    $('#spidergraphcontainer').ready(function () {
+
+		    //$('#spidergraphcontainer').show();
+		    //$("#spidergraphcontainer").css("visibility", "visible");
+	        console.log('FORM READY');
+	        console.log($('#spidergraphcontainer'));
+	        console.log(angular.element('#spidergraphcontainer'));
+	        //HACK TO WAIT FOR THE SPIDER GRAPH TO BE READY 
+	       setTimeout($scope.loadSpiderGraph, 100);
+	       // $scope.loadSpiderGraph();
+	        //;
+        });
     });
+    	
     
-    
-    	$scope.loadSpiderGraph();
-    
+      
   /*
     $('#spidergraphcontainer').spidergraph({
         'fields': ['trustworthy','consistency','quantity','recency','simplicity'],
@@ -140,9 +170,6 @@ angular.module('datasourceApp')
 	    //console.log( myCollection.toJSON() );
 	    $scope.categoriesCollection = myCategoryCollection;
 	    $scope.categories = eval(myCategoryCollection.toJSON());
-		
-		
-		
 		
 	    $scope.$apply();
 	  }
@@ -221,28 +248,15 @@ angular.module('datasourceApp')
 		datasourceEntry.set("tags",tagsArray);
 		datasourceEntry.set("deliveryFormat",dataFormatArray);
 		datasourceEntry.set("category",$scope.categoriesCollection.get($scope.inputForm.category));
-		datasourceEntry.set("dataQuality",$scope.inputForm.dataQuality);
-		datasourceEntry.set("dataQuantity",$scope.inputForm.dataQuantity);
+		datasourceEntry.set("ratingTrustworthy",$scope.inputForm.trustworthy);
+		datasourceEntry.set("ratingConsistency",$scope.inputForm.consistency);
+		datasourceEntry.set("ratingRecency",$scope.inputForm.recency);
+		datasourceEntry.set("ratingSimplicity",$scope.inputForm.simplicity);
+		datasourceEntry.set("ratingQuantity",$scope.inputForm.quantity);
 	    
-	    
-	    /*null, {
-		  success: function(result) {
-			   $scope.outputReturn="Submitted! Cheers. We will check it to see if everything's good before publishing it.";
-			    
-		
-		  },
-		  error: function(result, error) {
-		   $scope.outputReturn="Oups. there was an error in the submission process... Don't ask me why I'm just a computer";
-		
-		  }
-		}*/
-	    
-	    
+	   	    
 		datasourceEntry.save().then(function(){
-			
-			
-			
-			
+
 			$modalInstance.dismiss('submitted');
 			
 			$scope.outputReturn="Submitted! Cheers. We will check it to see if everything's good before publishing it.";
@@ -267,11 +281,9 @@ angular.module('datasourceApp')
     
         
     
+
   
-    
-    //$("#tags").select2({
-    //	closeOnSelect:false
-    //});
+
     
   });
   

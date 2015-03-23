@@ -38,7 +38,8 @@
 							    <!--{{datasource.name| uppercase}}<br>-->
 							    <img ng-hide="datasource.image" ng-src="{{'http://images.shrinktheweb.com/xino.php?stwembed=1&stwaccesskeyid=337f6ffe597b6b6&stwsize=sm&stwurl='+datasource.linkURL}}" />
 							    <img src="{{datasource.image.url}}" width="260px" height="auto" style="margin:auto;width:100%;height:auto;max-height:200px;max-width: 220px">
-							    
+							    <span style="position:absolute;left:5px;bottom:3px;font-size: x-small;color: grey">{{(datasource.deliveryFormat) ? (datasource.deliveryFormat | join:","):"Unknown"}}</span>
+							     <span style="position:absolute;right:5px;bottom:3px"><span style=""><span style="background-color: aqua;  ">Quantity</span></span></span>
 							</div>
                        </div>
                     </div> <!-- end front panel -->
@@ -51,7 +52,7 @@
 		                        
 		                        Format: {{(datasource.deliveryFormat) ? (datasource.deliveryFormat | join:","):"Unknown"}}<br>
 
-		                        <a ng-href="{{datasource.linkURL}}" target="_blank" tooltip="{{datasource.ink}}">{{datasource.name}}</a> | 
+		                        <a ng-href="{{datasource.linkURL}}" target="_blank" tooltip="{{datasource.linkURL}}">{{datasource.linkURL | filterHTTP}}</a> | 
 		                        <a target="_blank" ng-href="{{datasource.exampleURL}}">Example</a>
 	                        </div>
                         </div>
@@ -89,6 +90,6 @@
      
 		<h3><a href="mailto:mathieu.gosselin@rma-consulting.com">Tell us</a> how we can improve this tool</h3>
 		 <p style="font-size: x-small">Open source project maintained by <a href="">RMA Consulting</a>
-        Contribute on GITHUB</p>
+        Contribute on <a href="https://github.com/rma-consulting/great-sources-of-data">GITHUB</a></p>
   </div>
 </footer>

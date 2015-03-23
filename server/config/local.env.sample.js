@@ -7,13 +7,7 @@
 
 module.exports = {
   DOMAIN:           'http://localhost:9000',
-  SESSION_SECRET:   'datasource-secret',
-
-  TWITTER_ID:       'app-id',
-  TWITTER_SECRET:   'secret',
-
-  GOOGLE_ID:        'app-id',
-  GOOGLE_SECRET:    'secret',
+  SESSION_SECRET:   'lab-secret',
 
   // Control debug level for modules using visionmedia/debug
   DEBUG: ''

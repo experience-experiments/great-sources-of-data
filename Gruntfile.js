@@ -1,4 +1,4 @@
-// Generated on 2015-03-17 using generator-angular-fullstack 2.0.13
+// Generated on 2015-03-23 using generator-angular-fullstack 2.0.13
 'use strict';
 
 module.exports = function (grunt) {
@@ -22,9 +22,6 @@ module.exports = function (grunt) {
 
   // Time how long tasks take. Can help when optimizing build times
   require('time-grunt')(grunt);
-
-  //ALLOW RUNNING GULP TAKS IN GRUNT
-  grunt.loadNpmTasks('grunt-gulp');
 
   // Define the configuration for all the tasks
   grunt.initConfig({
@@ -313,7 +310,7 @@ module.exports = function (grunt) {
     ngtemplates: {
       options: {
         // This should be the name of your apps angular module
-        module: 'datasourceApp',
+        module: 'labApp',
         htmlmin: {
           collapseBooleanAttributes: true,
           collapseWhitespace: true,

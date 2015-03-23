@@ -75,10 +75,19 @@ angular.module('datasourceApp')
 	
 
 	
-  }).filter('filterByCategory',  function() {
+  }).filter('filterHTTP',  function() {
 
   return function(input) {
-	  input.category
-    return input ? '\u2713' : '\u2718';
+	  if(input){
+		  input = input.replace('http://','');
+		  input = input.replace('https://','');
+		
+		  if(input.indexOf("/")!=-1){
+			input = input.substring(0,input.indexOf("/"));
+		  }
+		
+	  }
+	  
+    return input;
   };
 });

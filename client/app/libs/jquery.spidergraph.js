@@ -195,7 +195,7 @@
                         data.activedata.data[activedrag] = newval;
                         $sg.trigger('spiderdatachange', [ data.activedata.data ]);
                         drawActiveData( $sg, data.canvasfg );
-                        console.log('changing' + activedrag + ' to ' + newval);
+                        console.log('changing ' + activedrag + ' to ' + newval);
                     }
 
                 }
