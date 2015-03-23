@@ -38,23 +38,43 @@
 							    <!--{{datasource.name| uppercase}}<br>-->
 							    <img ng-hide="datasource.image" ng-src="{{'http://images.shrinktheweb.com/xino.php?stwembed=1&stwaccesskeyid=337f6ffe597b6b6&stwsize=sm&stwurl='+datasource.linkURL}}" />
 							    <img src="{{datasource.image.url}}" width="260px" height="auto" style="margin:auto;width:100%;height:auto;max-height:200px;max-width: 220px">
-							    <span style="position:absolute;left:5px;bottom:3px;font-size: x-small;color: grey">{{(datasource.deliveryFormat) ? (datasource.deliveryFormat | join:","):"Unknown"}}</span>
-							     <span style="position:absolute;right:5px;bottom:3px"><span style=""><span style="background-color: aqua;  ">Quantity</span></span></span>
+							   <!-- <span style="position:absolute;left:5px;bottom:3px;font-size: x-small;color: grey">{{(datasource.deliveryFormat) ? (datasource.deliveryFormat | join:","):"Unknown"}}</span>-->
+							     <!--<span style="position:absolute;right:5px;bottom:3px"><span style=""><span style="background-color: aqua;  ">Quantity</span></span></span>-->
+							 
 							</div>
+							<span style="position:absolute;bottom:5px;width: 100px;margin: auto;"><rating style="left:-50px;position: relative" ng-model="datasource.averageRating" max="5" readonly="true" ></rating></span>    
                        </div>
                     </div> <!-- end front panel -->
                     <div class="back">
                         <div style="margin: 10px;">
-	                        <p>{{datasource.description}}</p><br>
-	                        <div>
-		                        Quality: <rating ng-model="datasource.dataQuality" max="5" readonly="true" on-hover="hoveringOver(value)" on-leave="overStar = null"></rating> | 
-		                        Quantity: <rating ng-model="datasource.dataQuantity" max="5" readonly="true" on-hover="hoveringOver(value)" on-leave="overStar = null"></rating><br><br>
-		                        
-		                        Format: {{(datasource.deliveryFormat) ? (datasource.deliveryFormat | join:","):"Unknown"}}<br>
+	                        <a ng-href="{{datasource.linkURL}}" target="_blank" tooltip="{{datasource.linkURL}}">{{datasource.linkURL | filterHTTP}}</a> | 
+		                        <a target="_blank" ng-href="{{datasource.exampleURL}}">Example</a><br>
+		                         <div class="format">{{(datasource.deliveryFormat) ? (datasource.deliveryFormat | join:","):"Unknown"}}<br></div><br>
 
-		                        <a ng-href="{{datasource.linkURL}}" target="_blank" tooltip="{{datasource.linkURL}}">{{datasource.linkURL | filterHTTP}}</a> | 
-		                        <a target="_blank" ng-href="{{datasource.exampleURL}}">Example</a>
-	                        </div>
+
+	                        <p>{{datasource.description}}</p><br>
+	                        <div class="listRatings">
+		                        <ul>
+			                        <li>
+			                        
+			                        QUANTITY<br><rating ng-model="datasource.ratingQuantity" max="5" readonly="true" on-hover="hoveringOver(value)" on-leave="overStar = null"></rating>
+			                     </li> 
+			                     <li>
+			                        RECENT<br><rating ng-model="datasource.ratingRecency" max="5" readonly="true" ></rating>
+			                     </li> 
+			                     <li>
+			                        EASE<br><rating ng-model="datasource.ratingSimplicity" max="5" readonly="true" ></rating>
+			                      </li> 
+			                     <li>
+			                        TRUST<br><rating ng-model="datasource.ratingTrustworthy" max="5" readonly="true" ></rating>
+			                      </li> 
+			                     <li>
+			                        QUALITY<br><rating ng-model="datasource.ratingConsistency" max="5" readonly="true" ></rating>
+			                     </li>
+		                        </ul>
+		                      </div>
+		                     
+		                        
                         </div>
                     </div> <!-- end back panel -->
                 </div> <!-- end card -->

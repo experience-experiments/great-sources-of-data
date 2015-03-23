@@ -26,6 +26,23 @@ angular.module('datasourceApp')
 	    $scope.datasourceCollection = eval(myCollection.toJSON());
 		 //console.log( $scope.datasourceCollection );
 		
+		//ADD AVERAGE RATING
+		for(var entry in $scope.datasourceCollection){
+			
+			var currentDataSource = $scope.datasourceCollection[entry];
+			
+			currentDataSource.averageRating = Math.round(((currentDataSource.ratingQuantity + currentDataSource.ratingRecency+currentDataSource.ratingSimplicity+currentDataSource.ratingTrustworthy+currentDataSource.ratingConsistency)/5)/2);
+			//DIVIDE RATINGS BY 2 TO MATCH 5 STAR RATINGS
+			//LATER TO HAVE HALVES STAR RATINGS
+			currentDataSource.ratingQuantity = Math.round(currentDataSource.ratingQuantity/2);
+			currentDataSource.ratingRecency = Math.round(currentDataSource.ratingRecency/2);
+			currentDataSource.ratingSimplicity = Math.round(currentDataSource.ratingSimplicity/2);
+			currentDataSource.ratingTrustworthy = Math.round(currentDataSource.ratingTrustworthy/2);
+			currentDataSource.ratingConsistency = Math.round(currentDataSource.ratingConsistency/2);
+
+			console.log(currentDataSource.averageRating);
+		}
+		
 	    $scope.$apply();
 	  }
 	});

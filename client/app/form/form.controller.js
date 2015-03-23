@@ -10,7 +10,7 @@ angular.module('datasourceApp')
     $scope.inputForm.spiderGraphLabels = ['trustworthy','consistency','quantity','recency','simplicity'];
 
 	
-	$scope.layerData = [3,3,4,5,6];
+	$scope.layerData = [2,2,2,2,2];
 	
 	
 	

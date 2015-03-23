@@ -34,6 +34,36 @@ body,html{
 	
 }
 
+.format{
+	font-size: 11px;
+	color: #787878;
+}
+
+
+.listRatings{
+	//transform: scale(0.8,0.8) translate(-60px,0);
+	margin: 0;
+	
+	position: absolute;
+	bottom: 5px;
+	ul{
+		
+		margin: 0;
+		padding: 0;
+		list-style-type: none;
+		font-weight: bold;
+		
+		li{
+			font-size: 12px;
+			text-align: center;
+			display: inline-block;
+			list-style-type: none;
+			max-width:66px;
+			width: 66px;
+			}
+	}
+}
+
 
 h6{
 	font-size: x-small
