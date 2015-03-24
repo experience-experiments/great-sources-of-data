@@ -8,7 +8,8 @@ angular.module('datasourceApp')
          onEnter: ['$stateParams', '$state', '$modal', '$resource', function($stateParams, $state, $modal, $resource) {
 	        $modal.open({
 	            templateUrl: "app/form/form.html",   
-	            controller: 'FormCtrl'
+	            controller: 'FormCtrl',
+	            size:'lg'
 	        }).result.finally(function() {
 	            $state.go('^');
 	        });

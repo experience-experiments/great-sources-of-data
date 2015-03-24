@@ -7,8 +7,9 @@ angular.module('datasourceApp')
     $scope.inputForm = {};
     $scope.inputForm.tags=[];
     $scope.inputForm.image="";
-    $scope.inputForm.spiderGraphLabels = ['trustworthy','consistency','quantity','recency','simplicity'];
+    $scope.inputForm.spiderGraphLabels = ['source trustworthiness','data consistency & quality','data quantity','recency','ease of use'];
 	
+	$scope.isError = false;
 	
 	
 	
@@ -40,8 +41,8 @@ angular.module('datasourceApp')
         $('#spidergraphcontainer').spidergraph('resetdata');
        $('#spidergraphcontainer').spidergraph('addlayer', {
             'name':'layer1',
-            'strokecolor':'rgba(230,104,230,0.1)',
-            'fillcolor':'rgba(230,104,230,0.6)',
+            'strokecolor':'rgba(40,150,255,0.9)',
+            'fillcolor':'rgba(44,160,254,0.6)',
             'data':[5,5,5,5,5]
         });
        
@@ -58,7 +59,7 @@ angular.module('datasourceApp')
       
 			$scope.$apply();
     	});
-
+		
     };
     
     
@@ -84,52 +85,15 @@ angular.module('datasourceApp')
 	    
 	    $('#spidergraphcontainer').ready(function () {
 
-		    //$('#spidergraphcontainer').show();
-		    //$("#spidergraphcontainer").css("visibility", "visible");
-	        console.log('FORM READY');
-	        console.log($('#spidergraphcontainer'));
-	        console.log(angular.element('#spidergraphcontainer'));
-	        //HACK TO WAIT FOR THE SPIDER GRAPH TO BE READY 
+	       	        //HACK TO WAIT FOR THE SPIDER GRAPH TO BE READY 
 	       setTimeout($scope.loadSpiderGraph, 100);
-	       // $scope.loadSpiderGraph();
-	        //;
+	       
+	       
+	       //$scope.dataForm.$setPristine();
         });
     });
     	
-    
-      
-  /*
-    $('#spidergraphcontainer').spidergraph({
-        'fields': ['trustworthy','consistency','quantity','recency','simplicity'],
-        'gridcolor': 'rgba(20,20,20,1)'
-    });
-      
-    
-    //
-     $('#spidergraphcontainer').spidergraph('addlayer', { 
-        'strokecolor': 'rgba(230,204,0,0.8)',
-        'fillcolor': 'rgba(230,204,0,0.6)',
-        'data': [5, 4, 9, 8, 1]
-    });
-    /*
-    $('#spidergraphcontainer').spidergraph('addlayer', { 
-        'strokecolor': 'rgba(230,204,230,0.8)',
-        'fillcolor': 'rgba(230,204,230,0.6)',
-        'data': [5, 4, 9, 8, 1]
-    });
-    /*
-    //ADD DYNAMIC LAYER TO ALLOW MOUSE AND IPAD INPUT TOUCH
-     $('#spidergraphcontainer').spidergraph('setactivedata', { 
-        'strokecolor': 'rgba(0,204,230,0.8)',
-        'fillcolor': 'rgba(0,204,230,0.6)',
-        'data': [5, 5, 5, 5, 5]
-    });
-    
-    
-        $('#spidergraphcontainer').bind('spiderdatachange', function( ev, data ) {
-        alert( 'first field value is ' + data[0] );
-    });*/
-    
+       
     
 	$scope.tags = [ ];
 	
@@ -173,6 +137,9 @@ angular.module('datasourceApp')
 	});
 	
     
+    
+    
+    
     $scope.onChangeFile = function(){
 	    console.log("change file");
 	   
@@ -200,13 +167,24 @@ angular.module('datasourceApp')
     }
     
     
+    
+    
+    
     $scope.onClickSubmit = function(){
-	    
-	    
+
 	    //IF FORMS ARE FILLED
 	    
 	    
 	    console.log("onclick submit");
+	    $scope.isError=false;
+	    
+			
+		 if (!$scope.inputForm.name) 
+		 { 
+			  $scope.isError=true;
+			  return; 
+		}
+	    
 	    
 	    //SEND DATA
 	    // Simple syntax to create a new subclass of Parse.Object.
@@ -253,12 +231,14 @@ angular.module('datasourceApp')
 	    
 	   	    
 		datasourceEntry.save().then(function(){
-
+			
+		
+			
 			$modalInstance.dismiss('submitted');
 			
-			$scope.outputReturn="Submitted! Cheers. We will check it to see if everything's good before publishing it.";
+			$scope.outputReturn="Submitted!\nCheers. We will check it to see if everything's good before publishing it.\nHave an awesome day";
 			
-			alert("Submitted! Cheers. We will check it to see if everything's legit before publishing it.");
+			setTimeout(function(){alert("Cheers!!\nWe will check it to see if everything's good before publishing it.\nHave an awesome day ;-)")},500);
 		
 		},function(error){
 			
@@ -293,4 +273,20 @@ angular.module('datasourceApp')
       element.bind('onchange', onChangeFunc);
     }
   };
+});
+
+
+angular.module('datasourceApp').directive('validFile',function(){
+  return {
+    require:'ngModel',
+    link:function(scope,el,attrs,ngModel){
+      //change event is fired when file is selected
+      el.bind('change',function(){
+        scope.$apply(function(){
+          ngModel.$setViewValue(el.val());
+          ngModel.$render();
+        });
+      });
+    }
+  }
 });

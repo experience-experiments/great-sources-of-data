@@ -86,8 +86,7 @@ angular.module('datasourceApp')
 	$scope.onClickAddBtn = function(){
 		
 		$state.go('main.form');
-		
-		
+
 	};
 	
 

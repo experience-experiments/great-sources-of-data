@@ -6,8 +6,7 @@ angular.module('datasourceApp', [
   'ngSanitize',
   'ui.router',
   'ui.bootstrap',
-  'ui.select'
-])
+  'ui.select'])
   .config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
     $urlRouterProvider
       .otherwise('/');

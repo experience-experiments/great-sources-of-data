@@ -41,3 +41,54 @@
     width: 300px;
     height: 300px;
 }
+
+.dataEntryForm{
+	font-family: avenir,sans,arial,helvetica;
+	color: #545454;
+	
+}
+
+#dataForm {
+  transition:0.5s linear all;
+  -webkit-transition:all linear 0.5s;
+  //background: white;
+  
+  .ng-pristine{
+		 
+		  box-shadow: 0 0 5px #e3e3e3;
+		  border-color: #e3e3e3;
+	  }
+	  
+	 .ng-dirty{
+		
+		box-shadow: 0 0 5px #3585ee;
+		border-color: #3585ee;
+		 
+		 &.ng-invalid {
+			  box-shadow: 0 0 5px #e7335a;
+			  border-color: #e7335a;
+			  
+			}
+		 &.ng-valid{
+				
+				box-shadow: 0 0 5px #3585ee;
+				border-color: #3585ee;
+				
+			}
+		
+		
+	}  
+	
+ 
+	
+  
+}
+
+
+
+
+.ng-enter, .ng-leave {
+  -webkit-transition:0.5s linear all;
+  transition:0.5s linear all;
+}
+
