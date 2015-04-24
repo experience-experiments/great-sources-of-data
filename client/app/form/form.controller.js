@@ -11,8 +11,7 @@ angular.module('datasourceApp')
 	
 	$scope.isError = false;
 	
-	
-	
+		
 	///////////////// SPIDER GRAPH STUFF ////////////////
 	// TO FIX //
 	
@@ -85,7 +84,7 @@ angular.module('datasourceApp')
 	    
 	    $('#spidergraphcontainer').ready(function () {
 
-	       	        //HACK TO WAIT FOR THE SPIDER GRAPH TO BE READY 
+	       //HACK TO WAIT FOR THE SPIDER GRAPH TO BE READY 
 	       setTimeout($scope.loadSpiderGraph, 100);
 	       
 	       
@@ -223,22 +222,48 @@ angular.module('datasourceApp')
 		datasourceEntry.set("tags",tagsArray);
 		datasourceEntry.set("deliveryFormat",dataFormatArray);
 		datasourceEntry.set("category",$scope.categoriesCollection.get($scope.inputForm.category));
-		datasourceEntry.set("ratingTrustworthy",$scope.inputForm.trustworthy);
-		datasourceEntry.set("ratingConsistency",$scope.inputForm.consistency);
-		datasourceEntry.set("ratingRecency",$scope.inputForm.recency);
-		datasourceEntry.set("ratingSimplicity",$scope.inputForm.simplicity);
-		datasourceEntry.set("ratingQuantity",$scope.inputForm.quantity);
+		datasourceEntry.set("ratingTrustworthy",$scope.inputForm.trustworthy||5);
+		datasourceEntry.set("ratingConsistency",$scope.inputForm.consistency||5);
+		datasourceEntry.set("ratingRecency",$scope.inputForm.recency||5);
+		datasourceEntry.set("ratingSimplicity",$scope.inputForm.simplicity||5);
+		datasourceEntry.set("ratingQuantity",$scope.inputForm.quantity||5);
 	    
 	   	    
 		datasourceEntry.save().then(function(){
 			
-		
-			
+
 			$modalInstance.dismiss('submitted');
 			
 			$scope.outputReturn="Submitted!\nCheers. We will check it to see if everything's good before publishing it.\nHave an awesome day";
 			
 			setTimeout(function(){alert("Cheers!!\nWe will check it to see if everything's good before publishing it.\nHave an awesome day ;-)")},500);
+			
+			
+			
+			var emailBody = "name: " + $scope.inputForm.name+
+			"\ndescription: "+$scope.inputForm.description+
+			"\nlinkURL: "+$scope.inputForm.linkURL+
+			"\nexampleURL: "+$scope.inputForm.exampleURL+
+			"\nratingTrustworthy: "+($scope.inputForm.trustworthy||5)+
+			"\nratingConsistency: "+($scope.inputForm.consistency||5)+
+			"\nratingRecency: "+($scope.inputForm.recency||5)+
+			"\nratingSimplicity: "+($scope.inputForm.simplicity||5)+
+			"\nratingQuantity: "+($scope.inputForm.quantity||5)+
+			"\n\nhttps://www.parse.com/apps/datasource/collections#class/datasource";
+			
+			
+			//SEND EMAIL NOTIFICATION
+			Parse.Cloud.run('sendEmail', {to:"mathieu.gosselin@rma-consulting.com",subject:"Data source added",body:emailBody}, {
+			  success: function(result) {
+			    console.log(result);
+			  },
+			  error: function(error) {
+				  	console.error('hello world ERROR');
+		
+			  }
+			});
+
+					
 		
 		},function(error){
 			
