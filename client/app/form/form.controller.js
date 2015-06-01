@@ -253,7 +253,7 @@ angular.module('datasourceApp')
 			
 			
 			//SEND EMAIL NOTIFICATION
-			Parse.Cloud.run('sendEmail', {to:"mathieu.gosselin@rma-consulting.com",subject:"Data source added",body:emailBody}, {
+			Parse.Cloud.run('sendEmail', {to:"satinder.ubhi@rma-consulting.com",subject:"Data source added",body:emailBody}, {
 			  success: function(result) {
 			    console.log(result);
 			  },

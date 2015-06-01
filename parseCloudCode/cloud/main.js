@@ -13,7 +13,7 @@ Parse.Cloud.define("sendEmail", function(request, response) {
 
 	//GET NOTIFIED WHEN SOMEONE ADDS A SOURCE
 	Mailgun.sendEmail({
-	  to: (request.params.to || "mathieu.gosselin@rma-consulting.com"),
+	  to: (request.params.to || "Satinder.Ubhi@rma-consulting.com"),
 	  from: "datasources@rma-consulting.com",
 	  subject: request.params.subject,
 	  text: request.params.body 
